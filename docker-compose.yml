@@ -5,3 +5,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+
+  mongo:
+    image: mongo
+    ports:
+     - "27017:27017"
+    volumes:
+      - .data/mongodb-data:/data/db
+
+  streaming_frontend:
+    build:
+      context: ./streaming_frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
