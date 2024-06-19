@@ -1,0 +1,7 @@
+services:
+  video_api:
+    build: 
+      context: ./backend/video_api/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
