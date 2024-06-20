@@ -52,6 +52,7 @@ func handleHLSFile() {
 		fmt.Println("Error al abrir el archivo:", err)
 		return
 	}
+	defer file.Close()
 
 	playlist, listType, err := m3u8.DecodeFrom(file, true)
 
@@ -82,7 +83,6 @@ func handleHLSFile() {
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+2), 10.0, "")
 		firstCall = false
 	} else if mediaSequence >= 61 {
-		fmt.Println("Entre al caso borde")
 		newPlaylist = mediaPlaylist
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence-61), 10.0, "")
 		newPlaylist.Remove()
