@@ -81,6 +81,14 @@ func handleHLSFile() {
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+1), 10.0, "")
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+2), 10.0, "")
 		firstCall = false
+	} else if mediaSequence >= 61 {
+		fmt.Println("Entre al caso borde")
+		newPlaylist = mediaPlaylist
+		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence-61), 10.0, "")
+		newPlaylist.Remove()
+		if mediaSequence == 63 {
+			newPlaylist.SeqNo = 0
+		}
 	} else {
 		newPlaylist = mediaPlaylist
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+3), 10.0, "")
