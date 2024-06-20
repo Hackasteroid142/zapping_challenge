@@ -1,18 +1,38 @@
-<script setup>
-import { ref } from 'vue'
+<script>
+import { ref } from "vue";
+import VideoPlayer from "./VideoPlayer.vue";
+import "video.js/dist/video-js.css";
+import axios from "axios";
 
-defineProps({
-  msg: String,
-})
+export default {
+  components: {
+    VideoPlayer,
+  },
+  data() {
+    return {
+      videoOptions: {
+        autoplay: true,
+        controls: false,
+        sources: [
+          {
+            src: "http://localhost:3000/segment.m3u8",
+            type: "application/x-mpegURL",
+          },
+        ],
+      },
+    };
+  },
+};
 
-const count = ref(0)
+const count = ref(0);
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <div>
+    <video-player :options="videoOptions" />
+  </div>
 
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
     <p>
       Edit
       <code>components/HelloWorld.vue</code> to test HMR

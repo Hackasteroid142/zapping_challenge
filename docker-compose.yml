@@ -1,21 +1,16 @@
+version: "3"
+
 services:
-  video_api:
+  video-api:
     build: 
-      context: ./backend/video_api/
+      context: backend/video_api
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - 3000:3000
 
-  mongo:
-    image: mongo
-    ports:
-     - "27017:27017"
-    volumes:
-      - .data/mongodb-data:/data/db
-
-  streaming_frontend:
+  streaming-frontend:
     build:
-      context: ./streaming_frontend
+      context: streaming_frontend
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - 8080:8080

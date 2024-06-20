@@ -6,15 +6,23 @@ import (
 	"net/http"
 )
 
+var counter int = 0
+
 func main() {
-	fs := http.FileServer(http.Dir("files"))
-	http.Handle("/", fs)
+	port := 3000
+	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
+		fmt.Printf("Starting request with counter %v\n", counter)
+		counter++
+		res.Header().Set("Access-Control-Allow-Origin", "*")
+		h := http.FileServer(http.Dir("files"))
+		fmt.Printf("Starting request with counter %v\n", counter)
+		h.ServeHTTP(res, req)
+	})
 
-	fmt.Println("Listening on :3000")
-	err := http.ListenAndServe(":3000", nil)
+	fmt.Printf("Starting server on %v\n", port)
 
+	err := http.ListenAndServe(fmt.Sprintf(":%v", port), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 }
