@@ -26,3 +26,11 @@ export default {
   },
 };
 </script>
+
+<route lang="json">
+{
+  "meta": {
+    "requiresAuth": true
+  }
+}
+</route>

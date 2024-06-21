@@ -10,9 +10,15 @@ const store = createStore({
   mutations: {
     setToken(state, token) {
       state.token = token;
+      localStorage.setItem("token", token);
     },
     setUser(state, user) {
       state.user = user;
+    },
+    delData(state) {
+      state.user = "";
+      state.token = null;
+      localStorage.removeItem("token");
     },
   },
   actions: {
@@ -33,6 +39,9 @@ const store = createStore({
       } catch (error) {
         throw error;
       }
+    },
+    logout({ commit }) {
+      commit("delData");
     },
   },
   getters: {
