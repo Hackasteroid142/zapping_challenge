@@ -1,14 +1,15 @@
- import { createWebHistory, createRouter } from 'vue-router'
 
-import HelloWorld from '../components/HelloWorld.vue'
+/**
+ * router/index.ts
+ *
+ * Automatic routes for `./src/pages/*.vue`
+ */
 
-const routes = [
-  { path: '/', component: HelloWorld },
-]
+// Composables
+import { createRouter, createWebHistory } from 'vue-router/auto'
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
 })
 
-export default router;
+export default router

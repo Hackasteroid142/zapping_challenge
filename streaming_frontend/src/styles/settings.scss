@@ -1,0 +1,32 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+// https://vuetifyjs.com/features/sass-variables/`
+// @use 'vuetify/settings' with (
+//   $color-pack: false
+// );
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ajusta la altura según tus necesidades */
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.big-title {
+  font-size: 100px;
+}
+
+.app-title {
+  font-size: 30px;
+}
+
+.purple-text {
+  color: #4a148c;
+}
