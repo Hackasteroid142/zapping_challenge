@@ -19,7 +19,7 @@ import router from "@/router";
 
 export default {
   computed: {
-    ...mapGetters(["getToken", "getUser"]),
+    ...mapGetters(["getToken", "getUser"])
   },
 
   methods: {
