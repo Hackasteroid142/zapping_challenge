@@ -17,7 +17,7 @@
       <v-alert
         v-model="showAlert"
         class="error-card"
-        text="Usuario no existe"
+        text="Usuario no existe o contraseña incorrecta"
         type="error"
       ></v-alert>
       <div class="image-container">

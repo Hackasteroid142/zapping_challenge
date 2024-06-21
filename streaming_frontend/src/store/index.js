@@ -4,8 +4,8 @@ import { jwtDecode } from "jwt-decode";
 
 const store = createStore({
   state: {
-    token: localStorage.getItem("token") || "",
-    user: JSON.parse(localStorage.getItem("user")) || null,
+    token: localStorage.getItem("token") || null,
+    user: localStorage.getItem("user") || "Usuario",
   },
   mutations: {
     setToken(state, token) {
@@ -14,11 +14,13 @@ const store = createStore({
     },
     setUser(state, user) {
       state.user = user;
+      localStorage.setItem("user", user);
     },
     delData(state) {
       state.user = "";
       state.token = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   actions: {
@@ -35,7 +37,7 @@ const store = createStore({
         const response = await UserService.logInUser(body);
         const userToken = jwtDecode(response.token);
         commit("setToken", response.token);
-        commit("setUser", userToken);
+        commit("setUser", userToken.name);
       } catch (error) {
         throw error;
       }

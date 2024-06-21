@@ -4,7 +4,7 @@
       ><v-icon icon="mdi-play-circle-outline"></v-icon>Kirora</v-app-bar-title
     >
     <v-spacer></v-spacer>
-    <p v-if="getToken">Hola {{ this.getUser.name }}!</p>
+    <p v-if="getToken">Hola {{ this.getUser }}!</p>
     <v-btn icon @click="exitApp" v-if="getToken">
       <v-icon>mdi-logout</v-icon>
     </v-btn>

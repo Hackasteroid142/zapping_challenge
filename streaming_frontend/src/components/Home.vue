@@ -6,7 +6,8 @@
         <h1 class="big-title">
           <v-icon icon="mdi-play-circle-outline"></v-icon>Kirora
         </h1>
-        <v-btn to="/logIn" color="purple-darken-4">Inicia sesión</v-btn>
+        <v-btn v-if="!getToken" to="/logIn" color="purple-darken-4">Inicia sesión</v-btn>
+        <v-btn v-if="getToken" to="/live" color="purple-darken-4">Ingresa</v-btn>
         <p>
           ¿No tienes una cuenta?
           <router-link to="/register"> Registrate </router-link>
@@ -43,12 +44,18 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
   data() {
     return {
       dialog: false,
       showCat: false,
     };
+  },
+
+  computed: {
+    ...mapGetters(["getToken"])
   },
 
   methods: {

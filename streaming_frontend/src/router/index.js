@@ -14,7 +14,6 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // Verificar si la ruta requiere autenticación y si el usuario está autenticado
-  console.log(to);
   if (to.meta.requiresAuth && !(localStorage.getItem('token') !== null)) {
     // Redirigir a la página de inicio de sesión u otra página
     next('/');
