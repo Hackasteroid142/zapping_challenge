@@ -17,7 +17,7 @@ var (
 )
 
 func main() {
-	port := 3000
+	port := 3001
 
 	// Iniciar la goroutine para la actualización periódica
 	go func() {

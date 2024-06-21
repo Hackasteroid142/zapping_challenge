@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/rs/cors"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -31,17 +32,21 @@ func main() {
 		panic(err)
 	}
 
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+	})
+
 	/*
 		POST /users
 		Crea un usuario en la base de datos
 	*/
-	http.HandleFunc("/users", func(res http.ResponseWriter, req *http.Request) {
+	handler1 := http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		if req.Method == http.MethodPost {
-			res.Header().Set("Access-Control-Allow-Origin", "*")
 			createUser(client, ctx, res, req)
 		}
 	})
 
+	handler1WithCors := c.Handler(handler1)
 	/*
 		POST /logIn
 		Verifica credenciales de usuario y retorna token si es
@@ -52,6 +57,8 @@ func main() {
 			logIn(client, ctx, res, req)
 		}
 	})
+
+	http.Handle("/users", handler1WithCors)
 
 	fmt.Printf("Starting server on %v\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
