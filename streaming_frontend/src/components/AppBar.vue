@@ -8,6 +8,9 @@
     <v-btn icon @click="exitApp" v-if="getToken">
       <v-icon>mdi-logout</v-icon>
     </v-btn>
+    <v-btn icon to="/" v-if="!getToken">
+      <v-icon>mdi-home</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 <script>

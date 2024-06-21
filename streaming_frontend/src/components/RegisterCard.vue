@@ -9,10 +9,26 @@
       <v-text-field v-model="email" label="Correo"></v-text-field>
       <v-text-field v-model="password" label="Contraseña"></v-text-field>
       <div class="text-center mt-4">
-        <v-btn color="purple-darken-4" @click="newUser" :disabled="!formFilled">Registrarme</v-btn>
+        <v-btn color="purple-darken-4" @click="newUser" :disabled="!formFilled"
+          >Registrarme</v-btn
+        >
       </div>
     </v-card-text>
-    <v-alert v-model="showAlert" class="error-card" text="Usuario existente" type="error"></v-alert>
+    <div v-if="showAlert">
+      <v-alert
+        class="error-card"
+        text="Usuario existente"
+        type="error"
+      ></v-alert>
+      <div class="image-container">
+        <v-img
+          :width="350"
+          aspect-ratio="16/9"
+          cover
+          src="https://http.cat/409"
+        ></v-img>
+      </div>
+    </div>
     <v-card-actions class="text-center justify-center">
       <p>
         ¿Ya tienes una cuenta?
@@ -32,7 +48,7 @@ export default {
       email: "",
       password: "",
       name: "",
-      showAlert: false
+      showAlert: false,
     };
   },
 
