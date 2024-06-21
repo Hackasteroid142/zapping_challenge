@@ -30,3 +30,16 @@
 .purple-text {
   color: #4a148c;
 }
+
+.video-player {
+  padding-right: 10px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Opcional: elimina scroll */
+  box-sizing: border-box;
+}
