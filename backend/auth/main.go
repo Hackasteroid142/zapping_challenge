@@ -51,14 +51,16 @@ func main() {
 		POST /logIn
 		Verifica credenciales de usuario y retorna token si es
 	*/
-	http.HandleFunc("/logIn", func(res http.ResponseWriter, req *http.Request) {
+	handler2 := http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 		if req.Method == http.MethodPost {
 			res.Header().Set("Access-Control-Allow-Origin", "*")
 			logIn(client, ctx, res, req)
 		}
 	})
+	handler2WithCors := c.Handler(handler2)
 
 	http.Handle("/users", handler1WithCors)
+	http.Handle("/logIn", handler2WithCors)
 
 	fmt.Printf("Starting server on %v\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))

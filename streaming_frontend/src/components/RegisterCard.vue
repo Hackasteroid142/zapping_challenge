@@ -56,9 +56,9 @@ export default {
           router.push("/logIn");
           this.showAlert = false;
         }
-        console.log("error", result);
+        console.log(result);
       } catch (error) {
-        console.log("hola", error.response);
+        console.log(error.response);
         this.showAlert = true;
       }
     },

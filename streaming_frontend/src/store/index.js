@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import UserService from "@/services/UserServices";
+import { jwtDecode } from "jwt-decode";
 
 const store = createStore({
   state: {
@@ -9,6 +10,9 @@ const store = createStore({
   mutations: {
     setToken(state, token) {
       state.token = token;
+    },
+    setUser(state, user) {
+      state.user = user;
     },
   },
   actions: {
@@ -20,12 +24,22 @@ const store = createStore({
         throw error;
       }
     },
+    async logInUser({ commit }, body) {
+      try {
+        const response = await UserService.logInUser(body);
+        const userToken = jwtDecode(response.token);
+        commit("setToken", response.token);
+        commit("setUser", userToken);
+      } catch (error) {
+        throw error;
+      }
+    },
   },
   getters: {
-    token(state) {
+    getToken(state) {
       return state.token;
     },
-    user(state) {
+    getUser(state) {
       return state.user;
     },
   },
