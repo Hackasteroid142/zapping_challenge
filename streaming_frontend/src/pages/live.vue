@@ -17,7 +17,7 @@ export default {
         muted: true,
         sources: [
           {
-            src: "http://localhost:3001/segment.m3u8",
+            src: "http://localhost:3000/segment.m3u8",
             type: "application/x-mpegURL",
           },
         ],

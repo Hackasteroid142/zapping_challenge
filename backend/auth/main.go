@@ -16,7 +16,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-const mongodbUri = "mongodb://localhost:27017"
+const mongodbUri = "mongodb://mongodb:27017"
 
 type User struct {
 	Name     string `json:"name"`

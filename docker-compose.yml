@@ -15,6 +15,13 @@ services:
     ports:
       - 8080:8080
 
+  auth:
+    build:
+      context: backend/auth
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+
   mongodb:
     image: mongo
     ports:
