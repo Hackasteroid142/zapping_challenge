@@ -80,6 +80,12 @@ func createUser(client *mongo.Client, ctx context.Context, res http.ResponseWrit
 		return
 	}
 
+	// Validación de parámetros obligatorios
+	if user.Name == "" || user.Email == "" || user.Password == "" {
+		http.Error(res, "Todos los campos (name, email, password) son obligatorios", http.StatusBadRequest)
+		return
+	}
+
 	// Verificación de que el usuario ingresado no exista
 	var existingUser User
 	filter := bson.D{{Key: "email", Value: user.Email}}
@@ -124,7 +130,11 @@ func logIn(client *mongo.Client, ctx context.Context, res http.ResponseWriter, r
 		http.Error(res, "Error al decodificar la solicitud", http.StatusBadRequest)
 		return
 	}
-
+	// Validación de parámetros obligatorios
+	if user.Email == "" || user.Password == "" {
+		http.Error(res, "Todos los campos (email, password) son obligatorios", http.StatusBadRequest)
+		return
+	}
 	// Busqueda de usuario en BD
 	var existingUser User
 	filter := bson.D{{Key: "email", Value: user.Email}}
