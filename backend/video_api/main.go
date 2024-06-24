@@ -78,18 +78,22 @@ func handleHLSFile() {
 
 	// Añadir segmentos a la nueva lista de reproducción
 	if firstCall {
+		// Se agregan primeros segment para primer llamado de API
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence), 10.0, "")
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+1), 10.0, "")
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+2), 10.0, "")
 		firstCall = false
 	} else if mediaSequence >= 61 {
+		// Se agrega primeros segment cuando se comienza a llegar al limite de segment disponibles
 		newPlaylist = mediaPlaylist
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence-61), 10.0, "")
 		newPlaylist.Remove()
 		if mediaSequence == 63 {
+			// Si se alcanza la cantidad limite de segment, se renicia el media-sequence
 			newPlaylist.SeqNo = 0
 		}
 	} else {
+		// En caso de que no se cumpla ninguno de los casos anteriores se agrega el segment siguiente
 		newPlaylist = mediaPlaylist
 		newPlaylist.Append(fmt.Sprintf("segment%d.ts", mediaSequence+3), 10.0, "")
 		newPlaylist.Remove()
@@ -103,6 +107,7 @@ func handleHLSFile() {
 	}
 	defer newFile.Close()
 
+	// Se escribe el nuevo archivo con los segment
 	newFile.Write(newPlaylist.Encode().Bytes())
 
 }
